@@ -10,7 +10,9 @@
    [:head
     [:title "The Captain's Mistress"]
     (include-css "/css/tictactoe.css")]
-   [:body [:div#wrapper content]]))
+   [:body [:div#holder [:div#title [:h1]] [:div#wrapper content]]
+    
+    ]))
 
 (defn cell-html [rownum colnum cell with-submit?] 
   [:td 
@@ -35,7 +37,7 @@
 (defn play-screen []
   (layout
     [:div 
-     [:p "Player HENK henk " (model/get-player) ", it is your turn!"]
+     [:p "Captain " (model/get-player) ", it is your time to shine!"]
      (board-html (model/get-board) true)]))
 
 (defn winner-screen [winner]

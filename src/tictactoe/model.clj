@@ -40,7 +40,7 @@
              (and (= e5 player) (= e6 player) (= e7 player) (= e8 player) ))
   )
 )
-;;(check-columns ["X""X""X""O""X""X""X""X"] "X")
+;; gebruik deze om de bovenstaande methode te testen (check-columns ["X""X""X""O""X""X""X""X"] "X")
 (defn check-nested-columns [board player]  
   (or (check-columns (get-in board [0]) player)
        (check-columns (get-in board [1]) player)
@@ -48,35 +48,23 @@
        (check-columns (get-in board [3]) player)
        (check-columns (get-in board [4]) player))
   )
-(check-nested-columns [["X""X""X""O""X""O""X""X"] ["X""X""O""X""X""O""X""X"]] "X")
+;; gebruik deze om de bovenstaande methode te testen (check-nested-columns [["X""X""X""O""X""O""X""X"] ["X""X""O""X""X""O""X""X"]] "X")
 
 (defn winner-in-rows? [board player]
   (do (println "Winner-in-rows? called " "\nBoard: " board "\nPlayer: " player)
   (boolean (check-nested-columns board player))))
 
-
-;(defn winner-in-rows? [board player]
-;  (do (println "Winner-in-rows? called " "\nBoard: " board "\nPlayer: " player)
-;  (boolean (some (fn [row] (every? (fn [x] (= x player)) row)) board))))
-
 (defn transposed-board [board]
   (vec (apply map vector board)))
 
-;(defn winner-in-cols? [board player]
-;  (winner-in-rows? (transposed-board board) player))
-
 (defn winner-in-cols? [board player]
   (winner-in-rows? (transposed-board board) player))
-
 
 (defn winner-in-diagonals? [board player]
   (let [diag-coords [[[0 0] [1 1] [2 2]]
                      [[0 2] [1 1] [2 0]]]]
     (boolean (some (fn [coords] 
-                     (every? (fn [coord] 
-                               (= player (apply get-board-cell board coord))) 
-                             coords))
-                   diag-coords))))
+                     (every? (fn [coord] (= player (apply get-board-cell board coord))) coords)) diag-coords))))
 
 (defn winner?
   "checks if there is a winner. when called with no args, checks for player X and player O.
