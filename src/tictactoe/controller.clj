@@ -9,6 +9,7 @@
   (view/play-screen))
 
 (defn turn-page [button-pressed]
+  (do (println "Turn-page called" "\nbutton-pressed: " button-pressed)
   (let [button-id (name (first (keys button-pressed)))
         rownr (Integer/parseInt (str (second button-id)))
         colnr (Integer/parseInt (str (nth button-id 2)))]
@@ -17,7 +18,7 @@
       (view/winner-screen winner)
       (if (model/full-board?)
         (view/draw-screen)
-        (view/play-screen)))))
+        (view/play-screen))))))
 
 (defroutes tictactoe-routes
   (GET "/" [] (start-page))
