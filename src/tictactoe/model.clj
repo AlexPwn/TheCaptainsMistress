@@ -62,8 +62,12 @@
 (defn transposed-board [board]
   (vec (apply map vector board)))
 
+;(defn winner-in-cols? [board player]
+;  (winner-in-rows? (transposed-board board) player))
+
 (defn winner-in-cols? [board player]
   (winner-in-rows? (transposed-board board) player))
+
 
 (defn winner-in-diagonals? [board player]
   (let [diag-coords [[[0 0] [1 1] [2 2]]
