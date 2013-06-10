@@ -1,4 +1,3 @@
-;;http://www.java-online.ch/gamegrid/gamegridEnglish/index.php?inhalt_links=navigation.inc.php&inhalt_mitte=gittergames/fourInARow.inc.php
 (ns tictactoe.model
   (:require [noir.session :as session]))
 
@@ -40,7 +39,7 @@
         (and (= e5 player) (= e6 player) (= e7 player) (= e8 player) ))
   )
 )
-;; gebruik deze om de bovenstaande methode te testen (check-columns ["X""X""X""O""X""X""X""X"] "X")
+
 (defn check-nested-columns [board player]  
   (or (check-columns (get-in board [0]) player)
        (check-columns (get-in board [1]) player)
@@ -59,17 +58,14 @@
       (check-columns (get-in board [6]) player)
       (check-columns (get-in board [7]) player))
   )
-;; gebruik deze om de bovenstaande methode te testen (check-nested-columns [["X""X""X""O""X""O""X""X"] ["X""X""O""X""X""O""X""X"]] "X")
 
 (defn winner-in-rows? [board player]
-  ;;(do (println "Winner-in-rows? called " "\nBoard: " board "\nPlayer: " player)
   (boolean (check-nested-columns board player)))
 
 (defn transposed-board [board]
   (vec (apply map vector board)))
 
 (defn winner-in-cols? [board player]
-  ;;(do (println "Winner-in-cols? called " "\nBoard: " (transposed-board board) "\nPlayer: " player)
   (boolean (check-nested-rows (transposed-board board) player)))
 
 (defn winner-in-diagonals? [board player]
