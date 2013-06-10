@@ -34,10 +34,10 @@
 (defn check-columns [board player]
   (let [[e1 e2 e3 e4 e5 e6 e7 e8] board] 
     (or (and (= e1 player) (= e2 player) (= e3 player) (= e4 player) )
-             (and (= e2 player) (= e3 player) (= e4 player) (= e5 player) )
-             (and (= e3 player) (= e4 player) (= e5 player) (= e6 player) )
-             (and (= e4 player) (= e5 player) (= e6 player) (= e7 player) )
-             (and (= e5 player) (= e6 player) (= e7 player) (= e8 player) ))
+        (and (= e2 player) (= e3 player) (= e4 player) (= e5 player) )
+        (and (= e3 player) (= e4 player) (= e5 player) (= e6 player) )
+        (and (= e4 player) (= e5 player) (= e6 player) (= e7 player) )
+        (and (= e5 player) (= e6 player) (= e7 player) (= e8 player) ))
   )
 )
 ;; gebruik deze om de bovenstaande methode te testen (check-columns ["X""X""X""O""X""X""X""X"] "X")
@@ -71,7 +71,6 @@
 (defn winner-in-cols? [board player]
   (do (println "Winner-in-cols? called " "\nBoard: " (transposed-board board) "\nPlayer: " player)
   (boolean (check-nested-rows (transposed-board board) player))))
-  ;;(winner-in-rows? (transposed-board board) player))
 
 (defn winner-in-diagonals? [board player]
   (let [diag-coords [[[0 0] [1 1] [2 2] [3 3]]
@@ -124,8 +123,11 @@ returns the character for the winning player, nil if there is no winner"
      :player (other-player (:player old-state))}
     old-state))
 
+(defn check-row-for-lowest-point [row col]
+  (if (= (get-board-cell (+ row 1) col) \-) (check-row-for-lowest-point (+ row 1) col) row)
+  )
+
 (defn play! [row col]
-   ;;(do (set-coordinates row col)
   (session/swap! (fn [session-map]
-                   (assoc session-map :game-state 
-                          (new-state row col (:game-state session-map))))))
+                   (assoc session-map :game-state
+                          (new-state (check-row-for-lowest-point row col) col (:game-state session-map))))))
