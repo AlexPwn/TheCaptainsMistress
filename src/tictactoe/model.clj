@@ -69,7 +69,7 @@
   (vec (apply map vector board)))
 
 (defn winner-in-cols? [board player]
-  (do (println "Winner-in-cols? called " "\nBoard: " board "\nPlayer: " player)
+  (do (println "Winner-in-cols? called " "\nBoard: " (transposed-board board) "\nPlayer: " player)
   (boolean (check-nested-rows (transposed-board board) player))))
   ;;(winner-in-rows? (transposed-board board) player))
 
