@@ -15,22 +15,11 @@
     
     ]))
 
-(defn placeholders-html []
-   [:tr
-    [:td { :class (str "placeholdercol0") }]
-    [:td { :id (str "placeholdercol1") }]
-    [:td { :id (str "placeholdercol2") }]
-    [:td { :id (str "placeholdercol3") }]
-    [:td { :id (str "placeholdercol4") }]
-    [:td { :id (str "placeholdercol5") }]
-    [:td { :id (str "placeholdercol6") }]
-    [:td { :id (str "placeholdercol7") }]
-   ])
-
 (defn cell-html [rownum colnum cell with-submit?] 
   [:td { :class (str "col" colnum) }
    [:input {:name (str "b" rownum colnum) 
-            :value (str cell)
+            :value ""
+            :class (if (= (str cell) "-") (str "token") (str "token" (str cell)))
             :type (if with-submit? 
                     "submit" 
                     "button")}]])
@@ -42,21 +31,20 @@
   
 (defn board-html [board with-submit?]
   (form-to [:post "/"]
-           [:table { :id "gameTable" }
-            (placeholders-html)
+           [:table
             (map-indexed (fn [rownum row]
                            (row-html rownum row with-submit?)) 
                          board)]))
 
 (defn play-screen []
   (layout
-     [:p "Captain " (model/get-player) ", it is your time to shine!"]
+     [:p "Captain " (if (= (str (model/get-player)) "O") (str "RED") (str "YELLOW")) ", it is your time to shine!" ]
      (board-html (model/get-board) true)))
 
 (defn winner-screen [winner]
   (layout
     [:div 
-   [:p "The winner is: " (model/other-player)]
+   [:p "The winner is: " (if (= (str (model/other-player)) "O") (str "RED") (str "YELLOW"))]
    (board-html (model/get-board) false)
    (link-to "/" "Reset")]))
 
@@ -66,4 +54,3 @@
      [:p "It's a draw!"]
      (board-html (model/get-board) false)
      (link-to "/" "Reset")]))
-  
