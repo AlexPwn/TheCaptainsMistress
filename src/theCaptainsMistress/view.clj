@@ -10,7 +10,7 @@
   (html5
    [:head
     [:title "The Captain's Mistress"]
-    (include-css "/css/tictactoe.css")
+    (include-css "/css/theCaptainsMistress.css")
     (include-js "/js/lib.js")]
    [:body [:div#holder [:div#title [:h1]] [:div#placeholders] [:div#wrapper content]]
     
