@@ -4,14 +4,15 @@
   (:require [tictactoe.test.testdata :as td]))
 
 (deftest get-board-cell-test
-  (let [testboard [[\X \- \- \-]
-                   [\- \O \- \-]
-                   [\- \- \X \-]
-                   [\- \- \- \O]]]
-    (is (get-board-cell testboard 0 0) \X)
-    (is (get-board-cell testboard 0 1) \-)
-    (is (get-board-cell testboard 1 1) \O)
-    (is (get-board-cell testboard 2 2) \X)))
+  (let [testboard [[\X \- \- \- \- \- \- \-]
+                   [\O \- \- \- \- \- \- \-]
+                   [\- \- \- \- \- \- \- \-]
+                   [\- \- \- \- \- \- \- \-]
+                   [\- \- \- \- \- \- \- \-]]]
+    (is (= \X (get-board-cell testboard 0 0)))
+    (is (= \O (get-board-cell testboard 1 0)))
+    (is (= \- (get-board-cell testboard 0 1)))
+    ))
 
 (deftest transposed-board-test
   (doseq [io-pair td/transposed-test-data]
@@ -57,16 +58,21 @@
   (binding [noir.session/*noir-session* (atom {})]
     (reset-game!)
     (play! 0 0)
-    (is (= (get-board-cell 0 0) \X))
+    (is (= (get-board-cell 4 0) \X))
     (play! 0 1)
-    (is (= (get-board-cell 0 1) \O))
+    (is (= (get-board-cell 4 1) \O))
     (play! 0 2)
-    (is (= (get-board-cell 0 2) \X))
+    (is (= (get-board-cell 4 2) \X))
     (is (= (get-player) \O))
     (play! 0 0)
-    (is (= (get-board-cell 0 0) \X) "value of cell 0 0 should still be X")
+    (play! 0 0)
+    (play! 0 0)
+    (play! 0 0)
+    (is (= (get-board-cell 4 0) \X) "value of cell 0 0 should still be X")
     (is (= (get-player) \O) "player should still be O")
     (reset-game!)))
+
+(run-tests)
 
 ;; exercise: add deftest for function winner?
 ;; exercise: macro for defining test scenarios which resets game automatically at beginning and end

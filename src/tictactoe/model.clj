@@ -62,15 +62,15 @@
 ;; gebruik deze om de bovenstaande methode te testen (check-nested-columns [["X""X""X""O""X""O""X""X"] ["X""X""O""X""X""O""X""X"]] "X")
 
 (defn winner-in-rows? [board player]
-  (do (println "Winner-in-rows? called " "\nBoard: " board "\nPlayer: " player)
-  (boolean (check-nested-columns board player))))
+  ;;(do (println "Winner-in-rows? called " "\nBoard: " board "\nPlayer: " player)
+  (boolean (check-nested-columns board player)))
 
 (defn transposed-board [board]
   (vec (apply map vector board)))
 
 (defn winner-in-cols? [board player]
-  (do (println "Winner-in-cols? called " "\nBoard: " (transposed-board board) "\nPlayer: " player)
-  (boolean (check-nested-rows (transposed-board board) player))))
+  ;;(do (println "Winner-in-cols? called " "\nBoard: " (transposed-board board) "\nPlayer: " player)
+  (boolean (check-nested-rows (transposed-board board) player)))
 
 (defn winner-in-diagonals? [board player]
   (let [diag-coords [[[0 0] [1 1] [2 2] [3 3]]
@@ -130,4 +130,4 @@ returns the character for the winning player, nil if there is no winner"
 (defn play! [row col]
   (session/swap! (fn [session-map]
                    (assoc session-map :game-state
-                          (new-state (check-row-for-lowest-point row col) col (:game-state session-map))))))
+                          (new-state (check-row-for-lowest-point 0 col) col (:game-state session-map))))))
