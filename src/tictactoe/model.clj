@@ -48,6 +48,17 @@
        (check-columns (get-in board [3]) player)
        (check-columns (get-in board [4]) player))
   )
+
+(defn check-nested-rows [board player]
+  (or (check-columns (get-in board [0]) player)
+      (check-columns (get-in board [1]) player)
+      (check-columns (get-in board [2]) player)
+      (check-columns (get-in board [3]) player)
+      (check-columns (get-in board [4]) player)
+      (check-columns (get-in board [5]) player)
+      (check-columns (get-in board [6]) player)
+      (check-columns (get-in board [7]) player))
+  )
 ;; gebruik deze om de bovenstaande methode te testen (check-nested-columns [["X""X""X""O""X""O""X""X"] ["X""X""O""X""X""O""X""X"]] "X")
 
 (defn winner-in-rows? [board player]
@@ -58,7 +69,9 @@
   (vec (apply map vector board)))
 
 (defn winner-in-cols? [board player]
-  (winner-in-rows? (transposed-board board) player))
+  (do (println "Winner-in-cols? called " "\nBoard: " board "\nPlayer: " player)
+  (boolean (check-nested-rows (transposed-board board) player))))
+  ;;(winner-in-rows? (transposed-board board) player))
 
 (defn winner-in-diagonals? [board player]
   (let [diag-coords [[[0 0] [1 1] [2 2]]

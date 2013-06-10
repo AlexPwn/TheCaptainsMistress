@@ -43,7 +43,7 @@
 (defn winner-screen [winner]
   (layout
     [:div 
-   [:p "The winner is: " winner]
+   [:p "The winner is: " (model/other-player)]
    (board-html (model/get-board) false)
    (link-to "/" "Reset")]))
 
