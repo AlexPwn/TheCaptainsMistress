@@ -1,5 +1,5 @@
-(ns tictactoe.repl
-  (:use tictactoe.handler
+(ns theCaptainsMistress.repl
+  (:use theCaptainsMistress.handler
         ring.server.standalone
         [ring.middleware file-info file]))
 

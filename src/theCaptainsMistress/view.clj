@@ -1,9 +1,9 @@
-(ns tictactoe.view
+(ns theCaptainsMistress.view
   (:use hiccup.form
         [hiccup.def :only [defhtml]]
         [hiccup.element :only [link-to]]
         [hiccup.page :only [html5 include-css include-js]])
-  (:require [tictactoe.model :as model]))
+  (:require [theCaptainsMistress.model :as model]))
 
 (defhtml layout [& content]
   (html5

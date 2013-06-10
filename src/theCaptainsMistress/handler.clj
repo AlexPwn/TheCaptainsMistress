@@ -1,5 +1,5 @@
-(ns tictactoe.handler
-  (:use tictactoe.controller
+(ns theCaptainsMistress.handler
+  (:use theCaptainsMistress.controller
         compojure.core)
   (:require [noir.util.middleware :as noir-middleware]
             [compojure.route :as route]))
@@ -9,7 +9,7 @@
   (route/not-found "Not Found"))
 
 ;;append your application routes to the all-routes vector
-(def all-routes [tictactoe-routes app-routes])
+(def all-routes [theCaptainsMistress-routes app-routes])
 
 (def app (-> all-routes
              noir-middleware/app-handler
