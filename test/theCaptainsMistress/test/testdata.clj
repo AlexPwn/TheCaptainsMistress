@@ -1,4 +1,4 @@
-(ns tictactoe.test.testdata
+(ns theCaptainsMistress.test.testdata
   (:use clojure.set))
 
 (defn row-win-combinations [p]

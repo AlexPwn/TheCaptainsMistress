@@ -1,4 +1,4 @@
-(ns tictactoe.alternative
+(ns theCaptainsMistress.alternative
 ;;Current X & Y coordinates of clicked button
 (def currentX (atom 0))
 (def currentY (atom 0))

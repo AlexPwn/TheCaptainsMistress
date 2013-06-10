@@ -1,8 +1,8 @@
-(ns tictactoe.controller
+(ns theCaptainsMistress.controller
   (:use compojure.core)
   (:require [compojure.core :as compojure]
-            [tictactoe.view :as view]
-            [tictactoe.model :as model]))
+            [theCaptainsMistress.view :as view]
+            [theCaptainsMistress.model :as model]))
 
 (defn start-page []
   (model/reset-game!)
@@ -20,6 +20,6 @@
         (view/draw-screen)
         (view/play-screen))))))
 
-(defroutes tictactoe-routes
+(defroutes theCaptainsMistress-routes
   (GET "/" [] (start-page))
   (POST "/" {button-pressed :params} (turn-page button-pressed)))
