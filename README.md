@@ -7,29 +7,14 @@ A simple server based game built with
 [Hiccup](https://github.com/weavejester/hiccup). The project template
 was borrowed from [Luminus](http://www.luminusweb.net/). 
 
-# Download and run: 
+# The Captain's Mistress
+=========
+	The Captain's Mistress is a simple four in a row game written in Clojure.
 
-    $ git clone git@github.com:borkdude/tictactoe.git
-    $ cd tictactoe
-    $ lein ring server
-    
-A browser window will open and you'll be able to play.
-
-# Run tests:    
-
-    $ lein test
-
-# Deploy to Heroku:
-
-    $ heroku create --stack cedar
-    $ git push heroku master    
-
-More, see [Heroku](https://blog.heroku.com/archives/2011/7/5/clojure_on_heroku).
-
-# TODO or student assignments
-
-* Make a ClojureScript variation of this game. How much of the code can be
-re-used?
-* Add Kerodon tests
-* Add AI so player can play against the computer
-* Think of more stuff to do
+# Rules 
+=========
+	- This game requires two to play.
+	- A player wins when there are four tokens aligned in a row.
+	- The tokens have to be aligned horizontal, vertical or diagonal.
+	- The stones always drop to the lowest available position.
+	- As soon as one player has four tokens on a row the game ends and the winner will be announced.
